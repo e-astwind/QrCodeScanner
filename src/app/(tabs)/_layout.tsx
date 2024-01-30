@@ -9,6 +9,7 @@ export default function TabRoutesLayout() {
         tabBarStyle: {
           backgroundColor: "#141414",
           height: 80,
+          borderTopWidth: 0,
         },
         tabBarActiveTintColor: "#22B1F8",
         tabBarLabelPosition: "below-icon",
@@ -42,7 +43,6 @@ export default function TabRoutesLayout() {
             backgroundColor: "#141414",
             height: 80,
           },
-
           headerTitleAlign: "center",
           title: "Scanner",
           tabBarIcon() {
