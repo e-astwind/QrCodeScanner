@@ -1,14 +1,30 @@
 import { Tabs } from "expo-router";
 import { MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
+import { View } from "react-native";
 export default function TabRoutesLayout() {
   return (
-    <Tabs>
+    <Tabs
+      initialRouteName="index"
+      screenOptions={({}) => ({
+        tabBarStyle: {
+          backgroundColor: "#141414",
+          height: 80,
+        },
+        tabBarActiveTintColor: "#22B1F8",
+        tabBarLabelPosition: "below-icon",
+        tabBarInactiveTintColor: "#fff",
+        tabBarLabelStyle: {
+          bottom: 8,
+          position: "absolute",
+        },
+      })}
+    >
       <Tabs.Screen
         name="create"
         options={{
           headerTitleStyle: { color: "#fff", fontSize: 18 },
           headerStyle: {
-            backgroundColor: "#262626",
+            backgroundColor: "#141414",
             height: 80,
           },
           headerTitleAlign: "center",
@@ -23,19 +39,34 @@ export default function TabRoutesLayout() {
         options={{
           headerTitleStyle: { color: "#fff", fontSize: 18 },
           headerStyle: {
-            backgroundColor: "#262626",
+            backgroundColor: "#141414",
             height: 80,
           },
+
           headerTitleAlign: "center",
           title: "Scanner",
-          tabBarIcon(props) {
+          tabBarIcon() {
             return (
-              <MaterialCommunityIcons
-                name="qrcode-scan"
-                size={24}
-                color={props.color}
-              />
+              <View
+                style={{
+                  backgroundColor: "#22B1F8",
+                  height: 60,
+                  width: 60,
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="qrcode-scan"
+                  size={24}
+                  color={"#FFF"}
+                />
+              </View>
             );
+          },
+          tabBarLabel() {
+            return <View />;
           },
         }}
       />
@@ -44,7 +75,7 @@ export default function TabRoutesLayout() {
         options={{
           headerTitleStyle: { color: "#fff", fontSize: 18 },
           headerStyle: {
-            backgroundColor: "#262626",
+            backgroundColor: "#141414",
             height: 80,
           },
           headerTitleAlign: "center",
@@ -53,7 +84,7 @@ export default function TabRoutesLayout() {
             return (
               <MaterialCommunityIcons
                 name="history"
-                size={24}
+                size={28}
                 color={props.color}
               />
             );
