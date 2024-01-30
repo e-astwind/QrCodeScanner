@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera/next";
 
 export default function Home() {
-  const { width } = Dimensions.get("screen");
+  const { width, height } = Dimensions.get("screen");
+  const [permission, requestPermission] = useCameraPermissions();
 
   const [axisPosition, setAxisPosition] = useState({
-    translateX: 0,
-    translateY: 0,
+    translateX: width / 2,
+    translateY: height / 3,
   });
   const [scale, setScale] = useState({
     scaleX: 160,
     scaleY: 160,
   });
-  const [permission, requestPermission] = useCameraPermissions();
 
   useEffect(() => {
     if (permission?.status === "granted") return;
@@ -29,10 +29,10 @@ export default function Home() {
     const sumReducer = (accumulator: number, currentValue: number) =>
       accumulator + currentValue;
 
-    let avgX = data.cornerPoints
+    const avgX = data.cornerPoints
       .map((point: { x: number; y: number }) => point.x)
       .reduce(sumReducer, 0);
-    let avgY = data.cornerPoints
+    const avgY = data.cornerPoints
       .map((point: { x: number; y: number }) => point.y)
       .reduce(sumReducer, 0);
 
@@ -57,10 +57,9 @@ export default function Home() {
         <View
           style={{
             position: "absolute",
-            start: width / 3.5,
             height: scale.scaleY,
             width: scale.scaleX,
-            left: axisPosition.translateX - scale.scaleX / 2,
+            right: axisPosition.translateX - scale.scaleX / 2,
             top: axisPosition.translateY - scale.scaleY / 2,
             borderWidth: 2,
             borderColor: "#FFF",
